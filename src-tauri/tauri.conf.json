@@ -1,0 +1,26 @@
+{
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
+    "devPath": "http://localhost:5173",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "GSTENG",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "windows": [
+      {
+        "title": "GSTENG - Your Coding Companion",
+        "width": 1200,
+        "height": 800,
+        "resizable": true,
+        "decorations": false
+      }
+    ],
+    "systemTray": {
+      "iconPath": "icons/tray_icon.png"
+    }
+  }
+}
