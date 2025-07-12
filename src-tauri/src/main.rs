@@ -1,8 +1,13 @@
 #![cfg_attr(all(not(debug_assertions), target_os = "windows"), windows_subsystem = "windows")]
 
+mod ai;
+mod voice;
+mod code_analysis;
+mod commands;
+
 fn main() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_store::Builder::default().build())
+        .invoke_handler(tauri::generate_handler![commands::ask_ai])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
