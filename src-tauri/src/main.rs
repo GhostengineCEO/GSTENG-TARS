@@ -3,6 +3,7 @@
 mod ai;
 mod voice;
 mod code_analysis;
+mod robotics;
 mod commands;
 
 fn main() {
