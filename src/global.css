@@ -1,0 +1,42 @@
+:root {
+  --color-background: #0a0a0a;
+  --color-primary: #ff6b35;
+  --color-secondary: #ffa500;
+  --color-text: #ffffff;
+  --color-code-bg: #1a1a1a;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: 'Inter', sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body {
+  overflow: hidden;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+code {
+  font-family: 'Source Code Pro', monospace;
+  background: var(--color-code-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}

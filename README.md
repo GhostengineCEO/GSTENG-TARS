@@ -46,6 +46,8 @@ This will compile the frontend and bundle the Tauri application.
 - @emotion/styled
 - framer-motion
 - monaco-editor
+- react-router-dom
+- @emotion/react
 
 ### Backend
 
