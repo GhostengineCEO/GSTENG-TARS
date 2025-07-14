@@ -85,3 +85,19 @@ pub async fn emergency_stop(
     telemetry.broadcast("emergency_stop".into()).await;
     state.set_state(RobotState::Idle).await;
 }
+
+#[command]
+pub async fn health_check(
+    safety: tauri::State<'_, SharedSafety>,
+    state: tauri::State<'_, StateManager>,
+) -> String {
+    if safety.is_emergency().await {
+        return "emergency".into();
+    }
+    match state.current_state().await {
+        RobotState::Idle
+        | RobotState::Listening
+        | RobotState::Thinking
+        | RobotState::Moving => "ok".into(),
+    }
+}

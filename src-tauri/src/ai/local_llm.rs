@@ -25,12 +25,18 @@ struct GenerateChunk {
 
 /// Attempt to generate a response from the local Ollama instance. If the call
 /// fails, the function falls back to the cloud model.
+#[cfg(not(test))]
 pub async fn generate_response(prompt: &str) -> String {
     let model = { CURRENT_MODEL.read().await.clone() };
     match generate_with_model(&model, prompt).await {
         Ok(r) => r,
         Err(_) => cloud_llm::generate_response(prompt).await,
     }
+}
+
+#[cfg(test)]
+pub async fn generate_response(_prompt: &str) -> String {
+    "local-test".into()
 }
 
 async fn generate_with_model(model: &str, prompt: &str) -> Result<String, reqwest::Error> {
