@@ -1,10 +1,10 @@
+use notify::{EventKind, RecommendedWatcher, RecursiveMode, Watcher};
 use serde::{Deserialize, Serialize};
 use std::{
     fs, io,
     path::{Path, PathBuf},
     sync::Arc,
 };
-use notify::{RecommendedWatcher, RecursiveMode, Watcher, EventKind};
 use tokio::sync::Mutex;
 
 const ENCRYPTION_KEY: &[u8] = b"gsteng-secret";
@@ -25,7 +25,10 @@ impl AiConfig {
 
 impl Default for AiConfig {
     fn default() -> Self {
-        Self { preferred_model: Self::default_model(), use_cloud: false }
+        Self {
+            preferred_model: Self::default_model(),
+            use_cloud: false,
+        }
     }
 }
 
@@ -53,7 +56,10 @@ impl HardwareProfile {
 
 impl Default for HardwareProfile {
     fn default() -> Self {
-        Self { port: Self::default_port(), baud_rate: Self::default_baud() }
+        Self {
+            port: Self::default_port(),
+            baud_rate: Self::default_baud(),
+        }
     }
 }
 
@@ -63,6 +69,12 @@ pub struct Personality {
     pub name: String,
     #[serde(default = "Personality::default_greeting")]
     pub greeting: String,
+    #[serde(default)]
+    pub humor: f32,
+    #[serde(default)]
+    pub honesty: f32,
+    #[serde(default)]
+    pub sarcasm: f32,
 }
 
 impl Personality {
@@ -76,7 +88,13 @@ impl Personality {
 
 impl Default for Personality {
     fn default() -> Self {
-        Self { name: Self::default_name(), greeting: Self::default_greeting() }
+        Self {
+            name: Self::default_name(),
+            greeting: Self::default_greeting(),
+            humor: 0.5,
+            honesty: 0.5,
+            sarcasm: 0.5,
+        }
     }
 }
 
@@ -94,7 +112,12 @@ pub struct Config {
 
 impl Default for Config {
     fn default() -> Self {
-        Self { ai: AiConfig::default(), api_keys: ApiKeys::default(), hardware: HardwareProfile::default(), personality: Personality::default() }
+        Self {
+            ai: AiConfig::default(),
+            api_keys: ApiKeys::default(),
+            hardware: HardwareProfile::default(),
+            personality: Personality::default(),
+        }
     }
 }
 
@@ -138,6 +161,9 @@ impl Config {
         if self.personality.greeting.is_empty() {
             self.personality.greeting = Personality::default_greeting();
         }
+        self.personality.humor = self.personality.humor.clamp(0.0, 1.0);
+        self.personality.honesty = self.personality.honesty.clamp(0.0, 1.0);
+        self.personality.sarcasm = self.personality.sarcasm.clamp(0.0, 1.0);
     }
 
     fn encrypt_keys(&mut self) {
@@ -178,7 +204,9 @@ fn decrypt(text: &str) -> String {
 pub fn start_hot_reload(path: PathBuf, cfg: SharedConfig) -> notify::Result<RecommendedWatcher> {
     let mut watcher = notify::recommended_watcher(move |res| {
         if let Ok(event) = res {
-            if matches!(event.kind, EventKind::Modify(_)) || matches!(event.kind, EventKind::Create(_)) {
+            if matches!(event.kind, EventKind::Modify(_))
+                || matches!(event.kind, EventKind::Create(_))
+            {
                 if let Ok(new_cfg) = Config::load(&path) {
                     let mut lock = cfg.blocking_lock();
                     *lock = new_cfg;
