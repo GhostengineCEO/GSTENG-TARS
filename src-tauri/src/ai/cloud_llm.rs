@@ -36,6 +36,7 @@ struct Delta {
 
 /// Generate a response from the OpenAI API. The function internally uses
 /// streaming responses but returns the aggregated result as a `String`.
+#[cfg(not(test))]
 pub async fn generate_response(prompt: &str) -> String {
     let key = match env::var("OPENAI_API_KEY") {
         Ok(k) => k,
@@ -105,4 +106,9 @@ pub async fn generate_response(prompt: &str) -> String {
     }
 
     "Failed to contact OpenAI".into()
+}
+
+#[cfg(test)]
+pub async fn generate_response(_prompt: &str) -> String {
+    "cloud-test".into()
 }
