@@ -14,3 +14,6 @@ tokio-stream = "0.1"
 async-trait = "0.1"
 tokio-tungstenite = { version = "0.20", features = ["rustls-tls-native-roots"] }
 futures-util = "0.3"
+toml = "0.8"
+notify = "6"
+base64 = "0.21"
