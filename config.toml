@@ -1,0 +1,22 @@
+[personality]
+humor = 0.5
+honesty = 0.9
+sarcasm = 0.2
+
+[ai]
+cloud_api_key = ""
+cloud_endpoint = "https://api.openai.com/v1/chat/completions"
+local_model_path = ""
+
+[robotics]
+telemetry_port = 9000
+watchdog_timeout = 30
+servo_min = 0.0
+servo_max = 180.0
+movement_rate_limit = 10
+
+[voice]
+recognition_engine = "default"
+tts_engine = "default"
+continuous_listening = false
+wake_word = "hey tars"
