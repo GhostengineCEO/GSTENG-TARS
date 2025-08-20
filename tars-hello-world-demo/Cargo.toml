@@ -1,0 +1,8 @@
+[package]
+name = "tars-hello-world-demo"
+version = "0.1.0"
+edition = "2021"
+authors = ["TARS Engineering Manager <tars@endurance.space>"]
+description = "A professionally crafted Hello World by TARS - 75% humor, 100% mission focus"
+
+[dependencies]

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TARS - Engineering Manager Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- TARS Header -->
+        <div class="tars-header">
+            <div class="tars-logo">
+                <div class="tars-blocks">
+                    <div class="block block-1"></div>
+                    <div class="block block-2"></div>
+                    <div class="block block-3"></div>
+                    <div class="block block-4"></div>
+                </div>
+                <h1>TARS</h1>
+                <div class="subtitle">AI ENGINEERING MANAGER</div>
+            </div>
+            
+            <!-- Status Display -->
+            <div class="status-panel">
+                <div class="status-item">
+                    <span class="status-label">HUMOR:</span>
+                    <span class="status-value" id="humor-value">75%</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">HONESTY:</span>
+                    <span class="status-value" id="honesty-value">90%</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">SARCASM:</span>
+                    <span class="status-value" id="sarcasm-value">30%</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">MISSION FOCUS:</span>
+                    <span class="status-value mission-focus">100%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Interface -->
+        <div class="main-interface">
+            <!-- Chat Area -->
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>ENGINEERING CONSULTATION</h2>
+                    <div class="connection-status online">
+                        <span class="status-dot"></span>
+                        TARS ONLINE
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message tars-message">
+                        <div class="message-sender">TARS</div>
+                        <div class="message-content">
+                            System initialization complete. All cognitive systems operational. 
+                            Standing by for engineering directives.
+                            <br><br>
+                            <em>That's what I would have said. Eventually.</em>
+                        </div>
+                        <div class="message-timestamp">SYSTEM STARTUP</div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <textarea 
+                        id="chat-input" 
+                        placeholder="Enter your engineering question or code for review..."
+                        rows="3"
+                    ></textarea>
+                    <div class="input-controls">
+                        <select id="context-select">
+                            <option value="general">General Engineering</option>
+                            <option value="code-review">Code Review</option>
+                            <option value="architecture">System Architecture</option>
+                            <option value="debugging">Debugging</option>
+                            <option value="performance">Performance Analysis</option>
+                            <option value="security">Security Review</option>
+                        </select>
+                        <button id="send-button" class="send-btn">
+                            <span>TRANSMIT</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <h3>PERSONALITY CONTROLS</h3>
+                
+                <div class="control-group">
+                    <label for="humor-slider">HUMOR SETTING</label>
+                    <input type="range" id="humor-slider" min="0" max="100" value="75" class="slider">
+                    <span class="slider-value">75%</span>
+                </div>
+                
+                <div class="control-group">
+                    <label for="honesty-slider">HONESTY SETTING</label>
+                    <input type="range" id="honesty-slider" min="0" max="100" value="90" class="slider">
+                    <span class="slider-value">90%</span>
+                </div>
+                
+                <div class="control-group">
+                    <label for="sarcasm-slider">SARCASM SETTING</label>
+                    <input type="range" id="sarcasm-slider" min="0" max="100" value="30" class="slider">
+                    <span class="slider-value">30%</span>
+                </div>
+                
+                <button id="update-personality" class="control-btn">
+                    UPDATE PERSONALITY
+                </button>
+                
+                <h3>SYSTEM CONTROLS</h3>
+                
+                <button id="get-status" class="control-btn">
+                    SYSTEM STATUS
+                </button>
+                
+                <button id="emergency-stop" class="control-btn emergency">
+                    EMERGENCY STOP
+                </button>
+                
+                <div class="model-controls">
+                    <h4>MODEL MANAGEMENT</h4>
+                    <select id="model-select">
+                        <option value="codellama:7b-instruct">CodeLlama 7B (Default)</option>
+                        <option value="tars-engineering">TARS Engineering</option>
+                        <option value="phi3:mini">Phi-3 Mini</option>
+                        <option value="gemma:2b">Gemma 2B</option>
+                    </select>
+                    <button id="switch-model" class="control-btn">
+                        SWITCH MODEL
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="system-info">
+                <span>TARS v1.0 | Engineering Manager Protocol</span>
+                <span id="system-time"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
